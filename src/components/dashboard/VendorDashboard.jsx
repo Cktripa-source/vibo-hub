@@ -8,7 +8,7 @@ const VendorDashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <Sidebar role="vendor" />
+            <Sidebar role={user?.role?.toLowerCase() || "vendor"} />
             <main className="flex-1 ml-64 bg-gray-100">
                 <div className="p-8">
                     <div className="mb-8">

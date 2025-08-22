@@ -5,15 +5,16 @@ import { Toaster } from 'react-hot-toast';
 
 // Pages
 import Home from './pages/Home';
-import Marketplace from './pages/Marketplace';
+import MarketplacePage from './pages/MarketplacePage';
 import VendorPage from './pages/VendorPage';
 import AffiliatePage from './pages/AffiliatePage';
-// import InfluencerPage from './pages/InfluencerPage';
+import InfluencerPage from './pages/InfluencerPage';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import VendorDashboard from './components/dashboard/VendorDashboard';
-import AffiliateDashboard from './components/dashboard/AffiliateDashboard';
-import InfluencerDashboard from './components/dashboard/InfluencerDashboard';
+import VendorDashboardPage from './pages/VendorDashboardPage';
+import AffiliateDashboardPage from './pages/AffiliateDashboardPage';
+import InfluencerDashboardPage from './pages/InfluencerDashboardPage';
+import RoleSelection from './components/auth/RoleSelection';
 
 // Context
 import { AuthProvider } from './contexts/AuthContext';
@@ -42,17 +43,18 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/marketplace" element={<Marketplace />} />
+              <Route path="/marketplace" element={<MarketplacePage />} />
               <Route path="/become-vendor" element={<VendorPage />} />
               <Route path="/become-affiliate" element={<AffiliatePage />} />
-              {/* <Route path="/influencers" element={<InfluencerPage />} /> */}
+              <Route path="/influencers" element={<InfluencerPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/role-selection" element={<RoleSelection />} />
 
               {/* Protected Routes - Dashboards */}
-              <Route path="/vendor-dashboard/*" element={<VendorDashboard />} />
-              <Route path="/affiliate-dashboard/*" element={<AffiliateDashboard />} />
-              <Route path="/influencer-dashboard/*" element={<InfluencerDashboard />} />
+              <Route path="/vendor/dashboard/*" element={<VendorDashboardPage />} />
+              <Route path="/affiliate/dashboard/*" element={<AffiliateDashboardPage />} />
+              <Route path="/influencer/dashboard/*" element={<InfluencerDashboardPage />} />
 
               {/* 404 Page */}
               <Route path="*" element={<NotFound />} />

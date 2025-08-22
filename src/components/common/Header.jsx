@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -59,7 +60,6 @@ const Header = () => {
       await authLogout();
       setIsUserMenuOpen(false);
       window.location.href = '/'; // Redirect to home page after logout
-      toast.success('Logged out successfully!');
     } catch (error) {
       console.error('Logout failed:', error);
       toast.error('Failed to logout. Please try again.');
@@ -164,26 +164,26 @@ const Header = () => {
           <div className="flex justify-between items-center h-16 lg:h-14">
 
             {/* Compact Logo for desktop */}
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="relative">
-                <div className="w-12 h-10 lg:w-8 lg:h-8 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 rounded-2xl lg:rounded-xl flex items-center justify-center shadow-xl shadow-orange-500/20 group-hover:shadow-orange-500/40 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-white/20">
-                  <span className="text-white font-black text-lg lg:text-sm tracking-tight">V</span>
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-2xl lg:rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 lg:w-3 lg:h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                  <Sparkles className="w-2 h-2 lg:w-1.5 lg:h-1.5 text-white" />
-                </div>
-              </div>
-              <div className="group-hover:translate-x-1 transition-transform duration-300">
-                <div className="text-2xl lg:text-xl font-black bg-gradient-to-r from-white via-purple-100 to-orange-200 text-transparent bg-clip-text">
-                  VIBO HUB
-                </div>
-                <div className="text-xs lg:text-xs text-orange-400 font-semibold -mt-1 flex items-center">
-                  <Rocket className="w-2.5 h-2.5 lg:w-2 lg:h-2 mr-1 animate-pulse" />
-                  Next-Gen Commerce
-                </div>
-              </div>
-            </div>
+           <Link to="/" className="flex items-center space-x-3 group cursor-pointer">
+  <div className="relative">
+    <div className="w-12 h-10 lg:w-8 lg:h-8 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 rounded-2xl lg:rounded-xl flex items-center justify-center shadow-xl shadow-orange-500/20 group-hover:shadow-orange-500/40 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-white/20">
+      <span className="text-white font-black text-lg lg:text-sm tracking-tight">V</span>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-2xl lg:rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+    </div>
+    <div className="absolute -top-1 -right-1 w-4 h-4 lg:w-3 lg:h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+      <Sparkles className="w-2 h-2 lg:w-1.5 lg:h-1.5 text-white" />
+    </div>
+  </div>
+  <div className="group-hover:translate-x-1 transition-transform duration-300">
+    <div className="text-2xl lg:text-xl font-black bg-gradient-to-r from-white via-purple-100 to-orange-200 text-transparent bg-clip-text">
+      VIBO HUB
+    </div>
+    <div className="text-xs lg:text-xs text-orange-400 font-semibold -mt-1 flex items-center">
+      <Rocket className="w-2.5 h-2.5 lg:w-2 lg:h-2 mr-1 animate-pulse" />
+      Next-Gen Commerce
+    </div>
+  </div>
+</Link>
 
             {/* Compact Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
@@ -302,20 +302,10 @@ const Header = () => {
                     >
                       <div className="relative">
                         <div className="w-8 h-8 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300 border border-white/20">
-                          <span className="text-white font-bold text-sm">{user?.avatar}</span>
+                          <span className="text-white font-bold text-sm">{user?.email?.charAt(0)?.toUpperCase() || user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
                         </div>
                         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border border-gray-900 rounded-full animate-pulse flex items-center justify-center">
                           <div className="w-1 h-1 bg-white rounded-full"></div>
-                        </div>
-                      </div>
-                      <div className="text-left hidden lg:block">
-                        <div className="text-white font-medium text-sm flex items-center">
-                          {user?.name}
-                          <Crown className="w-3 h-3 ml-1 text-yellow-400" />
-                        </div>
-                        <div className="text-xs text-purple-400 capitalize flex items-center">
-                          <Zap className="w-2 h-2 mr-1" />
-                          {user?.role} • {user?.level}
                         </div>
                       </div>
                       <ChevronDown className="w-3 h-3 text-gray-400 group-hover:text-white transition-all duration-300 group-hover:rotate-180" />
@@ -329,10 +319,11 @@ const Header = () => {
                         <div className="px-4 py-4 bg-gradient-to-r from-purple-600/30 via-pink-600/20 to-blue-600/20 border-b border-white/10">
                           <div className="flex items-center space-x-3 mb-3">
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-xl border border-white/20">
-                              <span className="text-white font-bold text-lg">{user?.avatar}</span>
+                              <span className="text-white font-bold text-lg">{user?.email?.charAt(0)?.toUpperCase() || user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
                             </div>
                             <div className="flex-1">
                               <p className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">{user?.name}</p>
+                              <p className="text-sm text-gray-400 truncate">{user?.email}</p>
                               <p className="text-sm text-gray-400 capitalize flex items-center mb-1">
                                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                                 {user?.role} • Online
@@ -511,16 +502,9 @@ const Header = () => {
                   {isAuthenticated ? (
                     <div className="space-y-3">
                       <div className="px-4 py-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl border border-white/10">
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center justify-center">
                           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center">
-                            <span className="text-white font-bold">{user?.avatar}</span>
-                          </div>
-                          <div>
-                            <p className="text-lg font-bold text-white">{user?.name}</p>
-                            <p className="text-sm text-purple-400 capitalize flex items-center">
-                              <Crown className="w-3 h-3 mr-1 text-yellow-400" />
-                              {user?.role} • {user?.level}
-                            </p>
+                            <span className="text-white font-bold">{user?.email?.charAt(0)?.toUpperCase() || user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
                           </div>
                         </div>
                       </div>

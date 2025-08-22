@@ -8,7 +8,7 @@ const InfluencerDashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <Sidebar role="influencer" />
+            <Sidebar role={user?.role?.toLowerCase() || "influencer"} />
             <main className="flex-1 ml-64 bg-gray-100">
                 <div className="p-8">
                     <div className="mb-8">

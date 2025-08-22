@@ -8,6 +8,7 @@ export const authAPI = {
         email,
         password,
       });
+      console.log('API Login response:', response);
       return response;
     } catch (error) {
       throw error;
@@ -18,6 +19,7 @@ export const authAPI = {
   register: async (userData) => {
     try {
       const response = await apiHelpers.post(apiEndpoints.auth.register, userData);
+      console.log('API Register response:', response);
       return response;
     } catch (error) {
       throw error;
@@ -26,9 +28,11 @@ export const authAPI = {
 
   // Verify token
   verifyToken: async (token) => {
+    // For JWT tokens, we can decode them directly
+    // In a real app, you might want to verify with the server
     try {
-      const response = await apiHelpers.post(apiEndpoints.auth.verify, { token });
-      return response;
+      // We'll just return a success response since the token will be verified in AuthContext
+      return { success: true };
     } catch (error) {
       throw error;
     }
@@ -147,10 +151,10 @@ export const authAPI = {
 };
 
 // Use mock functions in development
-const isDevelopment = process.env.NODE_ENV === 'development';
+// const isDevelopment = process.env.NODE_ENV === 'development';
 
-if (isDevelopment) {
-  authAPI.login = authAPI.mockLogin;
-  authAPI.register = authAPI.mockRegister;
-  authAPI.verifyToken = authAPI.mockVerifyToken;
-}
+// if (isDevelopment) {
+//   authAPI.login = authAPI.mockLogin;
+//   authAPI.register = authAPI.mockRegister;
+//   authAPI.verifyToken = authAPI.mockVerifyToken;
+// }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API base URL - update this to match your backend
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
 // Create axios instance
 const api = axios.create({
@@ -35,6 +35,15 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('viboHub_token');
       window.location.href = '/login';
+    }
+    
+    // Handle 409 Conflict error (email already exists)
+    if (error.response?.status === 409) {
+      return Promise.reject({
+        message: error.response?.data?.message || 'An account with this email already exists. Please use a different email or login instead.',
+        status: error.response?.status,
+        data: error.response?.data,
+      });
     }
     
     return Promise.reject({

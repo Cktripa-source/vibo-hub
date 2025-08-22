@@ -8,7 +8,7 @@ const AffiliateDashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <Sidebar role="affiliate" />
+            <Sidebar role={user?.role?.toLowerCase() || "affiliate"} />
             <main className="flex-1 ml-64 bg-gray-100">
                 <div className="p-8">
                     <div className="mb-8">
